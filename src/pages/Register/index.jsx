@@ -129,10 +129,7 @@ const Register = () => {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <div className="header">
-        <h1>Register</h1>
-      </div>
+    <Layout style={{ minHeight: '100vh' }} className="register">
       <Content className="content">
         <Form
           {...formItemLayout}
@@ -145,6 +142,8 @@ const Register = () => {
           scrollToFirstError
           size="large"
         >
+          <h1>Register</h1>
+
           <Form.Item
             label="Name"
             validateStatus={form.name.errorTxt && 'error'}
@@ -248,13 +247,7 @@ const Register = () => {
           </Form.Item>
         </Form>
       </Content>
-      <Footer
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Phu Nguyen - phu.nguyen@nfq.asia
-      </Footer>
+      <Footer className="footer">Phu Nguyen - phu.nguyen@nfq.asia</Footer>
     </Layout>
   )
 }

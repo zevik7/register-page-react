@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import 'antd/dist/antd.less'
+import './App.less'
 import RoutesApp from './components/RoutesApp'
 
 const App = () => {

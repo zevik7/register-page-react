@@ -1,5 +1,6 @@
-# Github page
-https://zevik7.github.io/register-page-react/
+# Description
+This is UI for a register page with form validation. 
+Check it out: https://zevik7.github.io/register-page-react/
 
 # Getting Started with Create React App
 

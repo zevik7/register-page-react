@@ -11,10 +11,14 @@ import {
   FormItemDate,
 } from '../../components'
 import { userValidator } from '../../utils/Validators'
+import { useLoading } from '../../context/LoadingContext'
+import Register from '../../api/Register'
 
 const { Content } = Layout
 
 const Register = () => {
+  const { loading, show, hide } = useLoading()
+
   const [form, setForm] = useState({
     name: { value: '', errorTxt: '' },
     gender: { value: 'male', errorTxt: '' },
@@ -42,7 +46,7 @@ const Register = () => {
     setForm({ ...form, birthday: { value: date, errorTxt } })
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     let formValidation = {}
     let isError = false
 
@@ -62,7 +66,9 @@ const Register = () => {
     if (isError) {
       setForm(formValidation)
     } else {
-      showResult()
+      show()
+
+      // showResult()
     }
   }
 

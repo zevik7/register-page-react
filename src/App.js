@@ -1,13 +1,13 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import './App.less'
 import RoutesApp from './components/RoutesApp'
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter base="/">
       <RoutesApp />
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

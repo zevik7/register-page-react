@@ -4,8 +4,14 @@ import { Form, Input, Button, Checkbox, DatePicker, Radio, Result } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import './style.less'
+import {
+  CopyrightFooter,
+  FormItem,
+  FormItemRadio,
+  FormItemDate,
+} from '../../components'
 
-const { Header, Footer, Content } = Layout
+const { Content } = Layout
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -122,9 +128,6 @@ const Register = () => {
       xs: {
         span: 24,
       },
-      sm: {
-        offset: 6,
-      },
     },
   }
 
@@ -143,99 +146,78 @@ const Register = () => {
           size="large"
         >
           <h1>Register</h1>
-
-          <Form.Item
+          <FormItem
             label="Name"
             validateStatus={form.name.errorTxt && 'error'}
             help={form.name.errorTxt}
-          >
-            <Input
-              suffix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Enter your name"
-              autoComplete="on"
-              name="name"
-              value={form.name.value}
-              onChange={handleOnChange}
-            />
-          </Form.Item>
-          <Form.Item label="Gender">
-            <Radio.Group
-              value={form.gender.value}
-              name="gender"
-              onChange={handleOnChange}
-            >
-              <Radio value="male">Male</Radio>
-              <Radio value="female">Female</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item
-            label="Birthday"
+            suffix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Enter your name"
+            autoComplete="on"
+            name="name"
+            value={form.name.value}
+            onChange={handleOnChange}
+          />
+          <FormItemRadio
+            label="Gender"
+            name="gender"
+            value={form.gender.value}
+            onChange={handleOnChange}
+            items={['male', 'female']}
+            itemLabels={['Male', 'Female']}
+          />
+          <FormItemDate
+            label={'Birthday'}
             validateStatus={form.birthday.errorTxt && 'error'}
             help={form.birthday.errorTxt}
-          >
-            <DatePicker
-              name="birthday"
-              value={form.birthday.value}
-              onChange={handleOnChangeDate}
-            />
-          </Form.Item>
-          <Form.Item
+            name={'birthday'}
+            value={form.birthday.value}
+            onChange={handleOnChangeDate}
+          />
+          <FormItem
             label="Phone"
             validateStatus={form.phone.errorTxt && 'error'}
             help={form.phone.errorTxt}
-          >
-            <Input
-              placeholder="Enter your phone"
-              autoComplete="on"
-              name="phone"
-              value={form.phone.value}
-              onChange={handleOnChange}
-            />
-          </Form.Item>
-          <Form.Item
+            placeholder="Enter your phone"
+            autoComplete="on"
+            name="phone"
+            value={form.phone.value}
+            onChange={handleOnChange}
+          />
+          <FormItem
             label="Email"
             validateStatus={form.email.errorTxt && 'error'}
             help={form.email.errorTxt}
-          >
-            <Input
-              placeholder="Enter your Email"
-              autoComplete="on"
-              name="email"
-              value={form.email.value}
-              onChange={handleOnChange}
-            />
-          </Form.Item>
-          <Form.Item
+            placeholder="Enter your email"
+            autoComplete="on"
+            name="email"
+            value={form.email.value}
+            onChange={handleOnChange}
+          />
+          <FormItem
+            suffix={<LockOutlined className="site-form-item-icon" />}
             label="Password"
             validateStatus={form.password.errorTxt && 'error'}
             help={form.password.errorTxt}
-          >
-            <Input
-              suffix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Enter your password"
-              autoComplete="on"
-              name="password"
-              value={form.password.value}
-              onChange={handleOnChange}
-            />
-          </Form.Item>
-          <Form.Item
+            placeholder="Enter new password"
+            autoComplete="on"
+            name="password"
+            value={form.password.value}
+            onChange={handleOnChange}
+            type="password"
+          />
+          <FormItem
+            suffix={<LockOutlined className="site-form-item-icon" />}
             label="Confirm Password"
             validateStatus={form.confirmPassword.errorTxt && 'error'}
             help={form.confirmPassword.errorTxt}
-          >
-            <Input
-              suffix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Enter your Confirm password"
-              autoComplete="on"
-              name="confirmPassword"
-              value={form.confirmPassword.value}
-              onChange={handleOnChange}
-            />
-          </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
+            placeholder="Retype the password"
+            autoComplete="on"
+            name="confirmPassword"
+            value={form.confirmPassword.value}
+            onChange={handleOnChange}
+            type="password"
+          />
+          <Form.Item {...tailFormItemLayout} className="login-form-submit">
             <Button
               type="primary"
               htmlType="submit"
@@ -247,7 +229,7 @@ const Register = () => {
           </Form.Item>
         </Form>
       </Content>
-      <Footer className="footer">Phu Nguyen - phu.nguyen@nfq.asia</Footer>
+      <CopyrightFooter />
     </Layout>
   )
 }

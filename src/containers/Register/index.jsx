@@ -10,6 +10,7 @@ import {
   FormItemRadio,
   FormItemDate,
 } from '../../components'
+import { userValidator } from '../../utils/Validators'
 
 const { Content } = Layout
 
@@ -24,91 +25,55 @@ const Register = () => {
     confirmPassword: { value: '', errorTxt: '' },
   })
 
-  const validate = (name, value) => {
-    let errorTxt = ''
-
-    if (!value) {
-      errorTxt = 'This field is required'
-    } else {
-      switch (name) {
-        case 'email':
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-            errorTxt = 'Invalid email address'
-          }
-          break
-        case 'phone':
-          const regex =
-            /^0(3[2-9]|5[689]|7(0|[6-9])|8([0-6]|8|9)|9([0-4]|[6-9]))[0-9]{7}$/
-          if (!regex.test(value)) {
-            errorTxt = 'Invalid phone number'
-          }
-          break
-        case 'password':
-          if (value.toString().length < 6) {
-            errorTxt = 'Minimum 6 characters'
-          }
-          break
-        case 'confirmPassword':
-          if (value !== form.password.value) {
-            errorTxt = 'Password and Confirm password are not same'
-          }
-          break
-        default:
-          break
-      }
-    }
-
-    return errorTxt
-  }
-
   const handleOnChange = (e) => {
     const name = e.target.name
     const value = e.target.value
 
-    let errorTxt = validate(name, value)
+    let errorTxt = userValidator(name, value)
+
+    if (name === 'confirmPassword' && value !== form.password.value)
+      errorTxt = 'Password and Confirm password are not same'
 
     setForm({ ...form, [name]: { value, errorTxt } })
   }
 
-  const handleOnChangeDate = (date, dateString) => {
-    let value = date
-    let errorTxt = ''
-
-    if (!value) errorTxt = 'This field is required'
-
-    if (new Date(dateString) > new Date()) {
-      errorTxt = 'Birthday must be lower than current date'
-    }
-
+  const handleOnChangeDate = (date) => {
+    let errorTxt = userValidator('birthday', date)
     setForm({ ...form, birthday: { value: date, errorTxt } })
   }
 
   const onSubmit = () => {
     let formValidation = {}
+    let isError = false
+
     // Validate all form's field
     for (let name in form) {
       let value = form[name].value
-      let errorTxt = validate(name, value)
+      let errorTxt = userValidator(name, value)
+
+      if (name === 'confirmPassword' && value !== form.password.value)
+        errorTxt = 'Password and Confirm password are not same'
+
+      if (errorTxt) isError = true
 
       formValidation[name] = { value, errorTxt }
     }
 
-    // Validate birthday
-    if (formValidation.birthday.value > moment()) {
-      formValidation.birthday.errorTxt =
-        'Birthday must be lower than current date'
+    if (isError) {
+      setForm(formValidation)
+    } else {
+      showResult()
     }
-
-    setForm(formValidation)
   }
 
-  const onFinish = () => {
+  const showResult = () => {
     let result = {}
     for (let name in form) {
       let value = form[name].value
       if (name === 'birthday') value = value.toISOString()
       result[name] = value
     }
+
     console.log(result)
   }
 
@@ -141,7 +106,6 @@ const Register = () => {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
           scrollToFirstError
           size="large"
         >

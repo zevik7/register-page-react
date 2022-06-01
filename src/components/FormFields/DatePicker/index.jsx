@@ -1,6 +1,6 @@
 import { Form, DatePicker } from 'antd'
 
-function FormItemDate(props) {
+function DatePickerField(props) {
   const { label, validateStatus, help, name, value, onChange, disabled } = props
 
   return (
@@ -15,4 +15,4 @@ function FormItemDate(props) {
   )
 }
 
-export default FormItemDate
+export default DatePickerField

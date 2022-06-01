@@ -1,14 +1,22 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LoadingContext = React.createContext()
 
-function LoadingProvider(props) {
-  const [isLoading, setIsLoading] = useState(false)
+function AuthContext(props) {
+  const [user, setUser] = useState({})
+  const navigate = useNavigate()
 
   const providerValues = {
-    isLoading,
-    setLoading: () => setIsLoading(true),
-    unSetLoading: () => setIsLoading(false),
+    user,
+    login: (user) => {
+      setUser(user)
+      navigate('/dashboard')
+    },
+    logout: () => {
+      setUser({})
+      navigate('/')
+    },
   }
 
   return (
@@ -23,4 +31,4 @@ function useLoading() {
 }
 
 export default LoadingContext
-export { LoadingProvider, useLoading }
+export { AuthContext, useLoading }

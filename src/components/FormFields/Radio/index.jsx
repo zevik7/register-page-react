@@ -1,6 +1,6 @@
 import { Form, Input, Radio } from 'antd'
 
-function FormItemRadio(props) {
+function RadioField(props) {
   const { label, name, value, onChange, items, itemLabels, disabled } = props
 
   return (
@@ -12,7 +12,7 @@ function FormItemRadio(props) {
         disabled={disabled}
       >
         {items.map((value, i) => (
-          <Radio key={i} value={value}>
+          <Radio key={value} value={value}>
             {itemLabels[i]}
           </Radio>
         ))}
@@ -21,4 +21,4 @@ function FormItemRadio(props) {
   )
 }
 
-export default FormItemRadio
+export default RadioField

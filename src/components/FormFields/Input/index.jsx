@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Input } from 'antd'
 
-function FormItem(props) {
+function InputField(props) {
   const {
     label,
     validateStatus,
@@ -32,4 +32,4 @@ function FormItem(props) {
   )
 }
 
-export default FormItem
+export default InputField

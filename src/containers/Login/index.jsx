@@ -5,13 +5,14 @@ import { LockOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import { CopyrightFooter, Input, Radio, DatePicker } from '../../components'
 import { userValidate } from '../../utils/Validators'
-import { useLoading } from '../../context'
-import { register } from '../../api'
+import { useLoading, useAuth } from '../../context'
+import { login as loginApi } from '../../api'
 
 const { Content } = Layout
 
 const Loggin = () => {
   const { isLoading, setLoading, unSetLoading } = useLoading()
+  const { user, login, logout } = useAuth()
 
   const [form, setForm] = useState({
     email: { value: '', errorTxt: '' },
@@ -44,22 +45,24 @@ const Loggin = () => {
     if (isError) {
       setForm(formValidation)
     } else {
+      const userData = getUserData()
       setLoading()
-      register().then((rs) => {
+      loginApi(userData).then((rs) => {
         console.log(rs)
         unSetLoading()
+        login(rs)
       })
     }
   }
 
-  const showResult = () => {
+  const getUserData = () => {
     let result = {}
     for (let name in form) {
       let value = form[name].value
       result[name] = value
     }
 
-    console.log(result)
+    return result
   }
 
   const formItemLayout = {

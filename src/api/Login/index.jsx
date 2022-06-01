@@ -1,4 +1,4 @@
-export default function loggin(data) {
+export default function login(data) {
   if (data)
     return new Promise((resolve) => {
       setTimeout(() => {

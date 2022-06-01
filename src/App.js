@@ -1,14 +1,10 @@
 import React from 'react'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import './App.less'
 import { RoutesApp } from './components'
 
 const App = () => {
-  return (
-    <HashRouter base="/">
-      <RoutesApp />
-    </HashRouter>
-  )
+  return <RoutesApp />
 }
 
 export default App

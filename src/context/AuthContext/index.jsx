@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const LoadingContext = React.createContext()
+const AuthContext = React.createContext()
 
-function AuthContext(props) {
+function AuthProvider(props) {
   const [user, setUser] = useState({})
   const navigate = useNavigate()
 
@@ -20,15 +20,15 @@ function AuthContext(props) {
   }
 
   return (
-    <LoadingContext.Provider value={providerValues}>
+    <AuthContext.Provider value={providerValues}>
       {props.children}
-    </LoadingContext.Provider>
+    </AuthContext.Provider>
   )
 }
 
-function useLoading() {
-  return useContext(LoadingContext)
+function useAuth() {
+  return useContext(AuthContext)
 }
 
-export default LoadingContext
-export { AuthContext, useLoading }
+export default AuthContext
+export { AuthProvider, useAuth }

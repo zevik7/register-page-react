@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/register-page-react/static/css/main.cea0e0be.css",
-    "main.js": "/register-page-react/static/js/main.43c6aa46.js",
+    "main.css": "/register-page-react/static/css/main.a8016115.css",
+    "main.js": "/register-page-react/static/js/main.a94aee0d.js",
     "static/js/787.0e6dc9a4.chunk.js": "/register-page-react/static/js/787.0e6dc9a4.chunk.js",
     "static/media/register-bg.jpg": "/register-page-react/static/media/register-bg.f5f55ddf2a2f601dca57.jpg",
     "index.html": "/register-page-react/index.html",
-    "main.cea0e0be.css.map": "/register-page-react/static/css/main.cea0e0be.css.map",
-    "main.43c6aa46.js.map": "/register-page-react/static/js/main.43c6aa46.js.map",
+    "main.a8016115.css.map": "/register-page-react/static/css/main.a8016115.css.map",
+    "main.a94aee0d.js.map": "/register-page-react/static/js/main.a94aee0d.js.map",
     "787.0e6dc9a4.chunk.js.map": "/register-page-react/static/js/787.0e6dc9a4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cea0e0be.css",
-    "static/js/main.43c6aa46.js"
+    "static/css/main.a8016115.css",
+    "static/js/main.a94aee0d.js"
   ]
 }

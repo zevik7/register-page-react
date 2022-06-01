@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 import { Form, Button, Modal } from 'antd'
 import { LockOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
@@ -13,6 +14,12 @@ const { Content } = Layout
 const Loggin = () => {
   const { isLoading, setLoading, unSetLoading } = useLoading()
   const { user, login, logout } = useAuth()
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user.token) navigate('/admin')
+  }, [])
 
   const [form, setForm] = useState({
     email: { value: '', errorTxt: '' },
@@ -133,6 +140,10 @@ const Loggin = () => {
               Log In
             </Button>
           </Form.Item>
+          <p className="to-login-page">
+            Or you have an account?{' '}
+            <span onClick={() => navigate('/register')}>Register</span>
+          </p>
         </Form>
       </Content>
       <CopyrightFooter />

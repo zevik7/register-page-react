@@ -8,11 +8,13 @@ import { CopyrightFooter, Input, Radio, DatePicker } from '../../components'
 import { userValidate } from '../../utils/Validators'
 import { useLoading } from '../../context'
 import { register } from '../../api'
+import { useNavigate } from 'react-router-dom'
 
 const { Content } = Layout
 
 const Register = () => {
   const { isLoading, setLoading, unSetLoading } = useLoading()
+  const navigate = useNavigate()
 
   const [form, setForm] = useState({
     name: { value: '', errorTxt: '' },
@@ -205,6 +207,10 @@ const Register = () => {
               Register
             </Button>
           </Form.Item>
+          <p className="to-login-page">
+            Or you have an account?{' '}
+            <span onClick={() => navigate('/login')}>Sign In</span>
+          </p>
         </Form>
       </Content>
       <CopyrightFooter />

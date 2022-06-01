@@ -1,76 +1,97 @@
-import React from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import React, { useState } from 'react'
+import { Layout, Menu, Dropdown, Space } from 'antd'
 import {
+  DownOutlined,
+  MailOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
   UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+  SettingOutlined,
+  AppstoreOutlined,
 } from '@ant-design/icons'
-const { Header, Content, Sider } = Layout
-const items1 = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}))
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1)
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        }
-      }),
-    }
-  }
-)
+import './style.less'
+import { useAuth } from '../../context'
 
-const Dashboard = () => (
-  <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={items1}
-      />
-    </Header>
-    <Layout>
-      <Sider width={200} className="site-layout-background">
+const { Header, Sider, Content } = Layout
+
+const Dashboard = () => {
+  const [collapsed, setCollapsed] = useState(false)
+  const { user, logout } = useAuth()
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: '1',
+          label: (
+            <a rel="noopener noreferrer" href="#" onClick={() => logout()}>
+              Log out
+            </a>
+          ),
+        },
+      ]}
+    />
+  )
+
+  return (
+    <Layout id="components-layout-demo-custom-trigger">
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="logo" />
         <Menu
+          theme="dark"
           mode="inline"
           defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{
-            height: '100%',
-            borderRight: 0,
-          }}
-          items={items2}
+          items={[
+            {
+              key: '1',
+              icon: <UserOutlined />,
+              label: 'nav 1',
+            },
+            {
+              key: '2',
+              icon: <VideoCameraOutlined />,
+              label: 'nav 2',
+            },
+            {
+              key: '3',
+              icon: <UploadOutlined />,
+              label: 'nav 3',
+            },
+          ]}
         />
       </Sider>
-      <Layout
-        style={{
-          padding: '0 24px 24px',
-        }}
-      >
-        <Breadcrumb
+      <Layout className="site-layout">
+        <Header
+          className="site-layout-background"
           style={{
-            margin: '16px 0',
+            padding: 0,
           }}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-        </Breadcrumb>
+          {React.createElement(
+            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+            {
+              className: 'trigger',
+              onClick: () => setCollapsed(!collapsed),
+            }
+          )}
+          <Dropdown
+            overlay={menu}
+            className="account-menu"
+            placement="bottomRight"
+          >
+            <Space>
+              Chao, {user.name}
+              <DownOutlined />
+            </Space>
+          </Dropdown>
+        </Header>
         <Content
           className="site-layout-background"
           style={{
+            margin: '24px 16px',
             padding: 24,
-            margin: 0,
             minHeight: 280,
           }}
         >
@@ -78,7 +99,7 @@ const Dashboard = () => (
         </Content>
       </Layout>
     </Layout>
-  </Layout>
-)
+  )
+}
 
 export default Dashboard

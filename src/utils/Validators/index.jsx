@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { titleCase } from '../String'
 
-export const userValidator = (name, value) => {
+export const userValidate = (name, value) => {
   let errorTxt = ''
 
   if (!value) {

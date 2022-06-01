@@ -11,14 +11,16 @@ function FormItem(props) {
     name,
     value,
     onChange,
-    suffix,
+    prefix,
     type,
+    disabled,
   } = props
 
   return (
     <Form.Item label={label} validateStatus={validateStatus} help={help}>
       <Input
-        suffix={suffix}
+        disabled={disabled}
+        prefix={prefix}
         placeholder={placeholder}
         autoComplete={autoComplete || 'on'}
         name={name}

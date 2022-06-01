@@ -1,6 +1,15 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import { Form, Input, Button, Checkbox, DatePicker, Radio, Result } from 'antd'
+import {
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  DatePicker,
+  Radio,
+  Result,
+  Modal,
+} from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import './style.less'
@@ -10,14 +19,14 @@ import {
   FormItemRadio,
   FormItemDate,
 } from '../../components'
-import { userValidator } from '../../utils/Validators'
-import { useLoading } from '../../context/LoadingContext'
-import Register from '../../api/Register'
+import { userValidate } from '../../utils/Validators'
+import { useLoading } from '../../context'
+import { register } from '../../api'
 
 const { Content } = Layout
 
 const Register = () => {
-  const { loading, show, hide } = useLoading()
+  const { isLoading, show, hide } = useLoading()
 
   const [form, setForm] = useState({
     name: { value: '', errorTxt: '' },
@@ -33,7 +42,7 @@ const Register = () => {
     const name = e.target.name
     const value = e.target.value
 
-    let errorTxt = userValidator(name, value)
+    let errorTxt = userValidate(name, value)
 
     if (name === 'confirmPassword' && value !== form.password.value)
       errorTxt = 'Password and Confirm password are not same'
@@ -42,7 +51,7 @@ const Register = () => {
   }
 
   const handleOnChangeDate = (date) => {
-    let errorTxt = userValidator('birthday', date)
+    let errorTxt = userValidate('birthday', date)
     setForm({ ...form, birthday: { value: date, errorTxt } })
   }
 
@@ -53,7 +62,7 @@ const Register = () => {
     // Validate all form's field
     for (let name in form) {
       let value = form[name].value
-      let errorTxt = userValidator(name, value)
+      let errorTxt = userValidate(name, value)
 
       if (name === 'confirmPassword' && value !== form.password.value)
         errorTxt = 'Password and Confirm password are not same'
@@ -66,9 +75,15 @@ const Register = () => {
     if (isError) {
       setForm(formValidation)
     } else {
-      show()
-
-      // showResult()
+      show() // Show animation
+      register().then((rs) => {
+        console.log(rs)
+        showResult() // This func for logging result
+        hide() // Hide animation
+        Modal.success({
+          content: 'Your account has been successfully created.',
+        })
+      })
     }
   }
 
@@ -115,17 +130,17 @@ const Register = () => {
           scrollToFirstError
           size="large"
         >
-          <h1>Register</h1>
+          <h1>Register your account</h1>
           <FormItem
             label="Name"
             validateStatus={form.name.errorTxt && 'error'}
             help={form.name.errorTxt}
-            suffix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Enter your name"
             autoComplete="on"
             name="name"
             value={form.name.value}
             onChange={handleOnChange}
+            disabled={isLoading}
           />
           <FormItemRadio
             label="Gender"
@@ -134,6 +149,7 @@ const Register = () => {
             onChange={handleOnChange}
             items={['male', 'female']}
             itemLabels={['Male', 'Female']}
+            disabled={isLoading}
           />
           <FormItemDate
             label={'Birthday'}
@@ -142,6 +158,7 @@ const Register = () => {
             name={'birthday'}
             value={form.birthday.value}
             onChange={handleOnChangeDate}
+            disabled={isLoading}
           />
           <FormItem
             label="Phone"
@@ -152,6 +169,7 @@ const Register = () => {
             name="phone"
             value={form.phone.value}
             onChange={handleOnChange}
+            disabled={isLoading}
           />
           <FormItem
             label="Email"
@@ -162,9 +180,10 @@ const Register = () => {
             name="email"
             value={form.email.value}
             onChange={handleOnChange}
+            disabled={isLoading}
           />
           <FormItem
-            suffix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined className="site-form-item-icon" />}
             label="Password"
             validateStatus={form.password.errorTxt && 'error'}
             help={form.password.errorTxt}
@@ -174,9 +193,10 @@ const Register = () => {
             value={form.password.value}
             onChange={handleOnChange}
             type="password"
+            disabled={isLoading}
           />
           <FormItem
-            suffix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined className="site-form-item-icon" />}
             label="Confirm Password"
             validateStatus={form.confirmPassword.errorTxt && 'error'}
             help={form.confirmPassword.errorTxt}
@@ -186,6 +206,7 @@ const Register = () => {
             value={form.confirmPassword.value}
             onChange={handleOnChange}
             type="password"
+            disabled={isLoading}
           />
           <Form.Item {...tailFormItemLayout} className="login-form-submit">
             <Button
@@ -193,6 +214,7 @@ const Register = () => {
               htmlType="submit"
               className="login-form-button"
               onClick={onSubmit}
+              loading={isLoading}
             >
               Register
             </Button>

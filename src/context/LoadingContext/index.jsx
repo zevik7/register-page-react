@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
-import api from '../../api/user'
+import React, { useContext, useState } from 'react'
 
 const LoadingContext = React.createContext()
 
 function LoadingProvider(props) {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const providerValues = {
-    loading,
-    show: () => setLoading(true),
-    hide: () => setLoading(false),
+    isLoading,
+    show: () => setIsLoading(true),
+    hide: () => setIsLoading(false),
   }
 
   return (
@@ -19,9 +18,9 @@ function LoadingProvider(props) {
   )
 }
 
-function userLoading() {
+function useLoading() {
   return useContext(LoadingContext)
 }
 
 export default LoadingContext
-export { LoadingProvider, userLoading }
+export { LoadingProvider, useLoading }

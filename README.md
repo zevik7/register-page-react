@@ -1,6 +1,7 @@
 # Description
-This is UI for a register page with form validation. 
-Check it out: https://zevik7.github.io/register-page-react/
+
+This is UI for a register page with form validation.
+Check it out: https://zevik7.github.io/unlock2-react/
 
 # Getting Started with Create React App
 

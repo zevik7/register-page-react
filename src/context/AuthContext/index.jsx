@@ -22,7 +22,8 @@ function AuthProvider(props) {
     login: (user) => {
       setUser(user)
       setStorageUser(user)
-      navigate('/setting')
+      if (user.role === 'user') navigate('/dashboard')
+      if (user.role === 'admin') navigate('/setting')
     },
     logout: () => {
       setUser({})

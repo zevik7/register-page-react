@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
-import { Form, Button, Modal } from 'antd'
+import { Form, Button, Alert } from 'antd'
 import { LockOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import { CopyrightFooter, Input, Radio, DatePicker } from '../../components'
@@ -13,18 +13,16 @@ const { Content } = Layout
 
 const Loggin = () => {
   const { isLoading, setLoading, unSetLoading } = useLoading()
-  const { user, login, logout } = useAuth()
+  const { login } = useAuth()
 
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (user.token) navigate('/admin')
-  }, [])
 
   const [form, setForm] = useState({
     email: { value: '', errorTxt: '' },
     password: { value: '', errorTxt: '' },
   })
+
+  const [invalidAccount, setInvalidAccount] = useState(false)
 
   const handleOnChange = (e) => {
     const name = e.target.name
@@ -64,6 +62,7 @@ const Loggin = () => {
         })
         .catch((err) => {
           console.log(err)
+          setInvalidAccount(true)
           unSetLoading()
         })
     }
@@ -137,6 +136,9 @@ const Loggin = () => {
               Log In
             </Button>
           </Form.Item>
+          {invalidAccount && (
+            <Alert message="Email or password is incorrect" type="error" />
+          )}
           <p className="switch-page">
             Or you have an account?{' '}
             <span onClick={() => navigate('/register')}>Register</span>

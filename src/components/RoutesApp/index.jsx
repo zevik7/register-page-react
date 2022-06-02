@@ -17,9 +17,16 @@ const RoutesApp = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
 
-      {user.role === 'admin' && <Route path="/setting" element={<Setting />} />}
+      {user.role === 'user' && (
+        <Route path="/dashboard" element={<Dashboard />} />
+      )}
+      {user.role === 'admin' && (
+        <>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/setting" element={<Setting />} />
+        </>
+      )}
 
       <Route path="*" element={<NoMatch />} />
     </Routes>

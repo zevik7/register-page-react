@@ -1,18 +1,37 @@
 export default function login(data) {
-  console.log(data)
+  const fakeUsers = [
+    {
+      name: 'Nguyen Huu Thien Phu',
+      email: 'phu@gmail.com',
+      password: '123123',
+      role: 'admin',
+    },
+    {
+      name: 'Tran Bui Ly Duc',
+      email: 'duc@gmail.com',
+      password: '123123',
+      age: 22,
+      role: 'user',
+    },
+    {
+      name: 'Nguyen Van Teo',
+      email: 'teo@gmail.com',
+      password: '123123',
+      role: 'user',
+    },
+  ]
+
   return new Promise((resolve, reject) => {
-    if (data && data.password === '123123')
+    const userValid = fakeUsers.find(
+      (user) => data.email === user.email && data.password === user.password
+    )
+    if (userValid)
       setTimeout(() => {
-        resolve({
-          name: 'Nguyen Huu Thien Phu',
-          avatar: '/image.jpg',
-          role: 'admin',
-          token: 'token_authentication',
-        })
+        resolve(userValid)
       }, 2000)
     else
       reject({
-        message: 'Password is incorrect',
+        message: 'Email or password is incorrect',
       })
   })
 }

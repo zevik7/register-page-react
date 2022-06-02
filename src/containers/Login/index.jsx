@@ -64,6 +64,7 @@ const Loggin = () => {
         })
         .catch((err) => {
           console.log(err)
+          unSetLoading()
         })
     }
   }

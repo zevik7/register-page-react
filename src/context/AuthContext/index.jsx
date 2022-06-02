@@ -3,15 +3,26 @@ import { useNavigate } from 'react-router-dom'
 
 const AuthContext = React.createContext()
 
+const getStorageUser = () => {
+  const userString = localStorage.getItem('user')
+  const user = JSON.parse(userString)
+  return user
+}
+
+const setStorageUser = (user) => {
+  localStorage.setItem('user', JSON.stringify(user))
+}
+
 function AuthProvider(props) {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(getStorageUser() || {})
   const navigate = useNavigate()
 
   const providerValues = {
     user,
     login: (user) => {
       setUser(user)
-      navigate('/dashboard')
+      setStorageUser(user)
+      navigate('/setting')
     },
     logout: () => {
       setUser({})

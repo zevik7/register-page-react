@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Home = () => {
+const Setting = () => {
   return (
     <h1
       style={{
@@ -13,4 +13,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Setting

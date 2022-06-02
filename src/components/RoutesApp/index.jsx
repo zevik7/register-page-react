@@ -4,27 +4,25 @@ import { Route, Routes, HashRouter, BrowserRouter } from 'react-router-dom'
 import Home from '../../containers/Home'
 import Register from '../../containers/Register'
 import Login from '../../containers/Login'
-import { LoadingProvider } from '../../context/LoadingContext'
-import { AuthProvider } from '../../context/AuthContext'
 import Dashboard from '../../containers/Dashboard'
 import NoMatch from '../../containers/NoMatch'
+import Setting from '../../containers/Setting'
+import { useAuth } from '../../context'
 
 const RoutesApp = () => {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <LoadingProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+  const { user } = useAuth()
 
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
-        </LoadingProvider>
-      </AuthProvider>
-    </BrowserRouter>
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
+      {user.role === 'admin' && <Route path="/setting" element={<Setting />} />}
+
+      <Route path="*" element={<NoMatch />} />
+    </Routes>
   )
 }
 

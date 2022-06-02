@@ -1,2 +1,2 @@
-export { default as register } from './Register'
-export { default as login } from './Login'
+export { default as register } from './register'
+export { default as login } from './login'

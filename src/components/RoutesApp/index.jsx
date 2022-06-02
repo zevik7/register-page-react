@@ -6,8 +6,8 @@ import Register from '../../containers/Register'
 import Login from '../../containers/Login'
 import { LoadingProvider } from '../../context/LoadingContext'
 import { AuthProvider } from '../../context/AuthContext'
-import ProtectedRoute from '../ProtectedRoute'
 import Dashboard from '../../containers/Dashboard'
+import NoMatch from '../../containers/NoMatch'
 
 const RoutesApp = () => {
   return (
@@ -18,14 +18,9 @@ const RoutesApp = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="*" element={<NoMatch />} />
           </Routes>
         </LoadingProvider>
       </AuthProvider>

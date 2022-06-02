@@ -52,24 +52,20 @@ const Loggin = () => {
     if (isError) {
       setForm(formValidation)
     } else {
-      const userData = getUserData()
       setLoading()
-      loginApi(userData).then((rs) => {
-        console.log(rs)
-        unSetLoading()
-        login(rs)
+      loginApi({
+        email: form.email.value,
+        password: form.password.value,
       })
+        .then((rs) => {
+          console.log(rs)
+          unSetLoading()
+          login(rs)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
-  }
-
-  const getUserData = () => {
-    let result = {}
-    for (let name in form) {
-      let value = form[name].value
-      result[name] = value
-    }
-
-    return result
   }
 
   const formItemLayout = {
@@ -92,12 +88,12 @@ const Loggin = () => {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh' }} className="register">
+    <Layout style={{ minHeight: '100vh' }} className="auth">
       <Content className="content">
         <Form
           {...formItemLayout}
           name="normal_login"
-          className="login-form"
+          className="auth-form"
           initialValues={{
             remember: true,
           }}
@@ -129,18 +125,18 @@ const Loggin = () => {
             type="password"
             disabled={isLoading}
           />
-          <Form.Item {...tailFormItemLayout} className="login-form-submit">
+          <Form.Item {...tailFormItemLayout} className="auth-form-submit">
             <Button
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className="auth-form-button"
               onClick={onSubmit}
               loading={isLoading}
             >
               Log In
             </Button>
           </Form.Item>
-          <p className="to-login-page">
+          <p className="switch-page">
             Or you have an account?{' '}
             <span onClick={() => navigate('/register')}>Register</span>
           </p>

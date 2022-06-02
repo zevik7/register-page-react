@@ -2,7 +2,7 @@
   "name": "learning-react",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://zevik7.github.io/register-page-react/",
+  "homepage": "https://zevik7.github.io/unlock2-react/",
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@reduxjs/toolkit": "^1.8.2",

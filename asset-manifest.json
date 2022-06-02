@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/register-page-react/static/css/main.bffeeb5e.css",
-    "main.js": "/register-page-react/static/js/main.4633ffb4.js",
-    "static/js/787.0e6dc9a4.chunk.js": "/register-page-react/static/js/787.0e6dc9a4.chunk.js",
-    "static/media/register-bg.jpg": "/register-page-react/static/media/register-bg.f5f55ddf2a2f601dca57.jpg",
-    "index.html": "/register-page-react/index.html",
-    "main.bffeeb5e.css.map": "/register-page-react/static/css/main.bffeeb5e.css.map",
-    "main.4633ffb4.js.map": "/register-page-react/static/js/main.4633ffb4.js.map",
-    "787.0e6dc9a4.chunk.js.map": "/register-page-react/static/js/787.0e6dc9a4.chunk.js.map"
+    "main.css": "/unlock2-react/static/css/main.07eb5283.css",
+    "main.js": "/unlock2-react/static/js/main.459af252.js",
+    "static/js/787.0e6dc9a4.chunk.js": "/unlock2-react/static/js/787.0e6dc9a4.chunk.js",
+    "static/media/register-bg.jpg": "/unlock2-react/static/media/register-bg.f5f55ddf2a2f601dca57.jpg",
+    "index.html": "/unlock2-react/index.html",
+    "main.07eb5283.css.map": "/unlock2-react/static/css/main.07eb5283.css.map",
+    "main.459af252.js.map": "/unlock2-react/static/js/main.459af252.js.map",
+    "787.0e6dc9a4.chunk.js.map": "/unlock2-react/static/js/787.0e6dc9a4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bffeeb5e.css",
-    "static/js/main.4633ffb4.js"
+    "static/css/main.07eb5283.css",
+    "static/js/main.459af252.js"
   ]
 }

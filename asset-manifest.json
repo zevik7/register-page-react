@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/unlock2-react/static/css/main.07eb5283.css",
-    "main.js": "/unlock2-react/static/js/main.459af252.js",
+    "main.js": "/unlock2-react/static/js/main.057629d2.js",
     "static/js/787.0e6dc9a4.chunk.js": "/unlock2-react/static/js/787.0e6dc9a4.chunk.js",
     "static/media/register-bg.jpg": "/unlock2-react/static/media/register-bg.f5f55ddf2a2f601dca57.jpg",
     "index.html": "/unlock2-react/index.html",
     "main.07eb5283.css.map": "/unlock2-react/static/css/main.07eb5283.css.map",
-    "main.459af252.js.map": "/unlock2-react/static/js/main.459af252.js.map",
+    "main.057629d2.js.map": "/unlock2-react/static/js/main.057629d2.js.map",
     "787.0e6dc9a4.chunk.js.map": "/unlock2-react/static/js/787.0e6dc9a4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.07eb5283.css",
-    "static/js/main.459af252.js"
+    "static/js/main.057629d2.js"
   ]
 }

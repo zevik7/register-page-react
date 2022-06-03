@@ -34,7 +34,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "prettier-all": "prettier --write *.{js,jsx,scss,css,md}",
+    "prettier-all": "prettier --write .",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },

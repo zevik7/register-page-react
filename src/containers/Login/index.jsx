@@ -13,9 +13,16 @@ const { Content } = Layout
 
 const Loggin = () => {
   const { isLoading, setLoading, unSetLoading } = useLoading()
-  const { login } = useAuth()
+  const { login, user } = useAuth()
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user.token) {
+      navigate('/dashboard')
+      console.log('here')
+    }
+  }, [])
 
   const [form, setForm] = useState({
     email: { value: '', errorTxt: '' },
@@ -59,6 +66,7 @@ const Loggin = () => {
           console.log(rs)
           unSetLoading()
           login(rs)
+          console.log(rs)
         })
         .catch((err) => {
           console.log(err)

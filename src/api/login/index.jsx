@@ -25,11 +25,13 @@ export default function login(data) {
     const userValid = fakeUsers.find(
       (user) => data.email === user.email && data.password === user.password
     )
-    if (userValid)
+
+    if (userValid) {
+      userValid.token = 'token123'
       setTimeout(() => {
         resolve(userValid)
       }, 2000)
-    else
+    } else
       reject({
         message: 'Email or password is incorrect',
       })

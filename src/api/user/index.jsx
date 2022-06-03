@@ -1,27 +1,22 @@
-export function getUser(data) {
-  if (data && data.token === 'token_authentication')
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve([
-          {
-            name: 'Nguyen Huu Thien Phu',
-            email: 'phu@gmail.com',
-            age: 22,
-            role: 'user',
-          },
-          {
-            name: 'Tran Bui Ly Duc',
-            email: 'duc@gmail.com',
-            age: 22,
-            role: 'user',
-          },
-          {
-            name: 'Nguyen Van Teo',
-            email: 'teo@gmail.com',
-            age: 22,
-            role: 'user',
-          },
-        ])
-      }, 2000)
-    })
-}
+import axios from 'axios'
+
+// Public
+export const storeUser = (data) => axios.post(`/user`, data)
+
+export const getUsers = (params) =>
+  axios.get(`/user`, {
+    params,
+  })
+
+// Require auth
+export const getUser = (_id) => axios.get(`/user/${_id}`)
+
+export const updateUser = (params, data) =>
+  axios.put(`/user`, data, {
+    params,
+  })
+
+export const destroyUsers = (data) =>
+  axios.delete(`/user`, {
+    params: data,
+  })

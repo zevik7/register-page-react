@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons'
 import './style.less'
 import { useAuth } from '../../context'
+import { Table } from '../../components'
 
 const { Header, Sider, Content } = Layout
 
@@ -95,7 +96,7 @@ const Dashboard = () => {
             minHeight: 280,
           }}
         >
-          Content
+          <Table />
         </Content>
       </Layout>
     </Layout>

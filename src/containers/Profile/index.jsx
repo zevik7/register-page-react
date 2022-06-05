@@ -11,7 +11,7 @@ const Setting = () => {
         fontSize: '40px',
       }}
     >
-      <h1>This is setting page</h1>
+      <h1>This is profile page</h1>
       <Button
         type="primary"
         htmlType="submit"

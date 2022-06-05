@@ -6,7 +6,7 @@ import Register from '../../containers/Register'
 import Login from '../../containers/Login'
 import Dashboard from '../../containers/Dashboard'
 import NoMatch from '../../containers/NoMatch'
-import Setting from '../../containers/Setting'
+import Profile from '../../containers/Profile'
 import { useAuth } from '../../context'
 
 const RoutesApp = () => {
@@ -19,12 +19,12 @@ const RoutesApp = () => {
       <Route path="/register" element={<Register />} />
 
       {user.role === 'user' && (
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Dashboard />} />
       )}
       {user.role === 'admin' && (
         <>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/setting" element={<Setting />} />
+          <Route path="/profile" element={<Profile />} />
         </>
       )}
 

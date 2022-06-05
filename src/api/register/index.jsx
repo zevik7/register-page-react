@@ -1,9 +1,3 @@
-export default function register() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        message: 'Api call successfully',
-      })
-    }, 2000)
-  })
-}
+import axios from 'axios'
+
+export const register = (data) => axios.post(`/auth/login`, data)

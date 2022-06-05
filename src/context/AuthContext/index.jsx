@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { setTokenApi } from '../../api'
 
 const AuthContext = React.createContext()
 
@@ -16,6 +17,10 @@ const setStorageUser = (user) => {
 function AuthProvider(props) {
   const [user, setUser] = useState(getStorageUser() || {})
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user.token) setTokenApi(user.token)
+  }, [])
 
   const providerValues = {
     user,

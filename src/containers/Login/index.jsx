@@ -18,9 +18,11 @@ const Loggin = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (user.token) {
+    if (user.token && user.role == 'user') {
+      navigate('/profile')
+    }
+    if (user.token && user.role == 'admin') {
       navigate('/dashboard')
-      console.log('here')
     }
   }, [])
 
@@ -63,13 +65,11 @@ const Loggin = () => {
         password: form.password.value,
       })
         .then((rs) => {
-          console.log(rs)
           unSetLoading()
-          login(rs)
+          login(rs.data)
           console.log(rs)
         })
         .catch((err) => {
-          console.log(err)
           setInvalidAccount(true)
           unSetLoading()
         })

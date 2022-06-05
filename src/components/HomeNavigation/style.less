@@ -1,26 +1,17 @@
 @import '~antd/lib/style/themes/default.less';
 
 .home-navigation {
+  padding: 20px 40px;
   display: flex;
-  justify-content: space-between;
-  padding: 20px 60px;
-  font-size: 18px;
 
-  .nav-list {
+  .menu {
+    flex: 1;
+    border-bottom: none;
+  }
+
+  .btns {
     display: flex;
-    gap: 20px;
-
-    .nav-item {
-      a {
-        color: @text-color;
-      }
-
-      &:hover {
-        a {
-          color: @primary-color-hover;
-          cursor: pointer;
-        }
-      }
-    }
+    align-items: center;
+    gap: 10px;
   }
 }

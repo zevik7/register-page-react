@@ -18,9 +18,7 @@ const RoutesApp = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {user.role === 'user' && (
-        <Route path="/profile" element={<Dashboard />} />
-      )}
+      {user.role === 'user' && <Route path="/profile" element={<Profile />} />}
       {user.role === 'admin' && (
         <>
           <Route path="/dashboard" element={<Dashboard />} />

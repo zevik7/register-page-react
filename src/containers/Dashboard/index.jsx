@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Layout, Menu, Dropdown, Space } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Modal, Layout, Menu, Dropdown, Space } from 'antd'
 import {
   DownOutlined,
   MailOutlined,
@@ -13,13 +13,52 @@ import {
 } from '@ant-design/icons'
 import './style.less'
 import { useAuth } from '../../context'
-import { Table } from '../../components'
+import { Table, Logo } from '../../components'
+import { getShoes } from '../../api'
 
 const { Header, Sider, Content } = Layout
+
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Descrition',
+    dataIndex: 'desc',
+    key: 'desc',
+  },
+]
 
 const Dashboard = () => {
   const [collapsed, setCollapsed] = useState(false)
   const { user, logout } = useAuth()
+  const [shoes, setShoes] = useState()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  useEffect(() => {
+    getShoes().then((rs) => {
+      const result = rs.data.data
+      setShoes(
+        result.map((rs) => ({
+          key: rs._id,
+          name: rs.name,
+          price: rs.price,
+          desc: rs.desc,
+        }))
+      )
+    })
+  }, [])
+
+  const onDelete = (selectedIds) => {
+    console.log(selectedIds)
+  }
 
   const menu = (
     <Menu
@@ -38,27 +77,22 @@ const Dashboard = () => {
 
   return (
     <Layout id="components-layout-demo-custom-trigger">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo" />
+      <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
+        <Logo />
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           defaultSelectedKeys={['1']}
           items={[
             {
               key: '1',
               icon: <UserOutlined />,
-              label: 'nav 1',
+              label: 'Shoes',
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
-            },
-            {
-              key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
+              icon: <UserOutlined />,
+              label: 'User',
             },
           ]}
         />
@@ -96,7 +130,9 @@ const Dashboard = () => {
             minHeight: 280,
           }}
         >
-          <Table />
+          {shoes && (
+            <Table columns={columns} data={shoes} onDelete={onDelete} />
+          )}
         </Content>
       </Layout>
     </Layout>

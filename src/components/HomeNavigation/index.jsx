@@ -1,34 +1,43 @@
-import React from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd'
-import { Button } from 'antd'
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Button, Menu } from 'antd'
+import NavLink from '../NavLink'
 import './style.less'
+import { useNavigate } from 'react-router-dom'
 
-const { Header, Content, Footer } = Layout
+const items = [
+  {
+    label: <NavLink to="/">Home</NavLink>,
+    key: 'home',
+  },
+  {
+    label: <NavLink to="/dashboard">Dashboard</NavLink>,
+    key: 'dashboard',
+  },
+  {
+    label: <NavLink to="/profile">Profile</NavLink>,
+    key: 'profile',
+  },
+]
 
-const HomeNavigation = () => (
-  <div className="home-navigation">
-    <ul className="nav-list">
-      <li className="nav-item">
-        <Link to="/">Home</Link>
-      </li>
-      <li className="nav-item">
-        <Link to="/dashboard">Dashboard</Link>
-      </li>
-      <li className="nav-item">
-        <Link to="/profile">Profile</Link>
-      </li>
-    </ul>
-    <div className="auth-btn-list">
-      <Button className="auth-btn-item" type="primary">
-        <Link to="/login">Login</Link>
-      </Button>
-      <Button className="auth-btn-item">
-        <Link to="/register">Register</Link>
-      </Button>
+const HomeNavigation = () => {
+  const navigate = useNavigate()
+
+  return (
+    <div className="home-navigation">
+      <Menu
+        inlineCollapsed={false}
+        mode="horizontal"
+        items={items}
+        className="menu"
+      />
+      <div className="btns">
+        <Button type="primary" onClick={() => navigate('/register')}>
+          Register
+        </Button>
+        <Button onClick={() => navigate('/login')}>Login</Button>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default HomeNavigation

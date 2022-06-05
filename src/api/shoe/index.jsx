@@ -1,20 +1,20 @@
 import axios from 'axios'
 
 // Public
-export const getArticles = (params) =>
-  axios.get(`/article`, {
+export const getShoes = (params) =>
+  axios.get(`/shoe`, {
     params,
   })
 
 // Require auth
-export const updateArticle = (params, data) =>
-  axios.put(`/article`, data, {
+export const updateShoe = (params, data) =>
+  axios.put(`/shoe`, data, {
     params,
   })
 
-export const storeArticle = (data) => axios.post(`/article`, data)
+export const storeShoe = (data) => axios.post(`/shoe`, data)
 
-export const destroyArticles = (data) =>
-  axios.delete(`/article`, {
+export const destroyShoes = (data) =>
+  axios.delete(`/shoe`, {
     params: data,
   })

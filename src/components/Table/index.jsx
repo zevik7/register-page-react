@@ -19,39 +19,8 @@ const columns = [
     dataIndex: 'address',
     key: 'address',
   },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green'
-
-          if (tag === 'loser') {
-            color = 'volcano'
-          }
-
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          )
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
 ]
+
 const data = [
   {
     key: '1',
@@ -94,11 +63,12 @@ const TableCustom = (props) => {
   const hasSelected = selectedRowKeys.length > 0
 
   return (
-    <div>
+    <>
       <div
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
+          gap: '20px',
           marginBottom: 16,
         }}
       >
@@ -110,12 +80,19 @@ const TableCustom = (props) => {
         >
           {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
         </span>
-        <Button type="primary" onClick={onDelete} disabled={!hasSelected}>
+        <Button
+          type="outlined"
+          onClick={() => onDelete(selectedRowKeys)}
+          disabled={!hasSelected}
+        >
           Delete
+        </Button>
+        <Button type="primary" onClick={() => onDelete(selectedRowKeys)}>
+          Add
         </Button>
       </div>
       <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
-    </div>
+    </>
   )
 }
 

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context'
 
 const Setting = () => {
   const navigate = useNavigate()
+  const { logout } = useAuth()
   return (
     <div
       style={{
@@ -27,6 +29,14 @@ const Setting = () => {
         onClick={() => navigate('/')}
       >
         Home
+      </Button>
+      <Button
+        type="secondary"
+        htmlType="submit"
+        className="auth-form-button"
+        onClick={() => logout()}
+      >
+        Logout
       </Button>
     </div>
   )

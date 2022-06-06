@@ -7,6 +7,7 @@ import Login from '../../containers/Login'
 import Dashboard from '../../containers/Dashboard'
 import NoMatch from '../../containers/NoMatch'
 import Profile from '../../containers/Profile'
+import Search from '../../containers/Search'
 import { useAuth } from '../../context'
 
 const RoutesApp = () => {
@@ -17,6 +18,7 @@ const RoutesApp = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/search" element={<Search />} />
 
       {user.role === 'user' && <Route path="/profile" element={<Profile />} />}
       {user.role === 'admin' && (

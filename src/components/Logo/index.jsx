@@ -4,7 +4,7 @@ const Logo = () => {
       src="/logo.jpg"
       alt=""
       style={{
-        width: '100%',
+        width: '60px',
         height: '60px',
         objectFit: 'contain',
       }}

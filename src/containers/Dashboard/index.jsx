@@ -13,8 +13,16 @@ import {
 } from '@ant-design/icons'
 import './style.less'
 import { useAuth } from '../../context'
-import { Table, Logo } from '../../components'
-import { getShoes } from '../../api'
+import {
+  Table,
+  Logo,
+  CopyrightFooter,
+  Input,
+  Radio,
+  DatePicker,
+} from '../../components'
+import { getShoes, destroyShoes } from '../../api'
+import AddingModal from './AddingModal'
 
 const { Header, Sider, Content } = Layout
 
@@ -40,7 +48,7 @@ const Dashboard = () => {
   const [collapsed, setCollapsed] = useState(false)
   const { user, logout } = useAuth()
   const [shoes, setShoes] = useState()
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isAddingModalVisible, setIsAddingModalVisible] = useState(false)
 
   useEffect(() => {
     getShoes().then((rs) => {
@@ -58,6 +66,18 @@ const Dashboard = () => {
 
   const onDelete = (selectedIds) => {
     console.log(selectedIds)
+    destroyShoes({ ids: selectedIds })
+    getShoes().then((rs) => {
+      const result = rs.data.data
+      setShoes(
+        result.map((rs) => ({
+          key: rs._id,
+          name: rs.name,
+          price: rs.price,
+          desc: rs.desc,
+        }))
+      )
+    })
   }
 
   const menu = (
@@ -76,7 +96,7 @@ const Dashboard = () => {
   )
 
   return (
-    <Layout id="components-layout-demo-custom-trigger">
+    <Layout id="dashboard-layout">
       <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
         <Logo />
         <Menu
@@ -131,10 +151,16 @@ const Dashboard = () => {
           }}
         >
           {shoes && (
-            <Table columns={columns} data={shoes} onDelete={onDelete} />
+            <Table
+              columns={columns}
+              data={shoes}
+              onDelete={onDelete}
+              onAdd={() => setIsAddingModalVisible(!isAddingModalVisible)}
+            />
           )}
         </Content>
       </Layout>
+      <AddingModal isModalVisible={isAddingModalVisible} />
     </Layout>
   )
 }

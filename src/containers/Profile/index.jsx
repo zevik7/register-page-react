@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context'
@@ -6,6 +6,7 @@ import { useAuth } from '../../context'
 const Setting = () => {
   const navigate = useNavigate()
   const { logout } = useAuth()
+
   return (
     <div
       style={{

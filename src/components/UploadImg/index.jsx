@@ -2,32 +2,26 @@ import React from 'react'
 import { Upload, Button } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
-const fileList = [
-  {
-    uid: '-1',
-    name: 'xxx.png',
-    status: 'done',
-    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    thumbUrl:
-      'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  },
-  {
-    uid: '-2',
-    name: 'yyy.png',
-    status: 'error',
-  },
-]
+const UploadImg = (props) => {
+  const { onChange, fileList, type } = props
 
-const UploadImg = () => (
-  <>
-    <Upload
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      listType="picture"
-      defaultFileList={[...fileList]}
-    >
-      <Button icon={<UploadOutlined />}>Upload</Button>
-    </Upload>
-  </>
-)
+  const config = {
+    name: 'images',
+    action: process.env.REACT_APP_SERVER_API + `/${type}`,
+    listType: 'picture',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange: onChange,
+  }
+
+  return (
+    <>
+      <Upload {...config}>
+        <Button icon={<UploadOutlined />}>Add images</Button>
+      </Upload>
+    </>
+  )
+}
 
 export default UploadImg

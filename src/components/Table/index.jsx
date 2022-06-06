@@ -3,7 +3,7 @@ import { Table, Tag, Space, Button } from 'antd'
 import './style.less'
 
 const TableCustom = (props) => {
-  const { data, columns, onDelete, onAdd, onEdit } = props
+  const { data, columns, onDelete, onAdd, onClickRow } = props
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
@@ -17,6 +17,11 @@ const TableCustom = (props) => {
   }
 
   const hasSelected = selectedRowKeys.length > 0
+
+  const handleDelete = (selectedRowKeys) => {
+    onDelete(selectedRowKeys)
+    setSelectedRowKeys([])
+  }
 
   return (
     <>
@@ -38,7 +43,7 @@ const TableCustom = (props) => {
         </span>
         <Button
           type="outlined"
-          onClick={() => onDelete(selectedRowKeys)}
+          onClick={() => handleDelete(selectedRowKeys)}
           disabled={!hasSelected}
         >
           Delete
@@ -50,9 +55,11 @@ const TableCustom = (props) => {
       <Table
         onRow={(record, rowIndex) => {
           return {
-            onClick: onEdit, // click row
+            onClick: () => onClickRow(record), // click row
           }
         }}
+        bordered={true}
+        rowClassName={'table-row'}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={data}

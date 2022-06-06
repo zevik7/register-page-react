@@ -21,7 +21,7 @@ import {
   Radio,
   DatePicker,
 } from '../../components'
-import { getShoes, destroyShoes } from '../../api'
+import { getShoes, destroyShoes, storeShoe } from '../../api'
 import AddingModal from './AddingModal'
 
 const { Header, Sider, Content } = Layout
@@ -49,6 +49,7 @@ const Dashboard = () => {
   const { user, logout } = useAuth()
   const [shoes, setShoes] = useState()
   const [isAddingModalVisible, setIsAddingModalVisible] = useState(false)
+  const [editingModalData, setEditingModalData] = useState()
 
   useEffect(() => {
     getShoes().then((rs) => {
@@ -78,6 +79,10 @@ const Dashboard = () => {
         }))
       )
     })
+  }
+
+  const onClickTableRow = (data) => {
+    console.log(data)
   }
 
   const menu = (
@@ -155,12 +160,16 @@ const Dashboard = () => {
               columns={columns}
               data={shoes}
               onDelete={onDelete}
+              onClickRow={onClickTableRow}
               onAdd={() => setIsAddingModalVisible(!isAddingModalVisible)}
             />
           )}
         </Content>
       </Layout>
-      <AddingModal isModalVisible={isAddingModalVisible} />
+      <AddingModal
+        isModalVisible={isAddingModalVisible}
+        onCancel={() => setIsAddingModalVisible(false)}
+      />
     </Layout>
   )
 }

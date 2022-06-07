@@ -23,6 +23,7 @@ import {
 } from '../../components'
 import { getShoes, destroyShoes, storeShoe } from '../../api'
 import AddingModal from './AddingModal'
+import EditingModal from './EditingModal'
 
 const { Header, Sider, Content } = Layout
 
@@ -49,7 +50,8 @@ const Dashboard = () => {
   const { user, logout } = useAuth()
   const [shoes, setShoes] = useState()
   const [isAddingModalVisible, setIsAddingModalVisible] = useState(false)
-  const [editingModalData, setEditingModalData] = useState()
+  const [isEditingModalVisible, setIsEditingModalVisible] = useState(false)
+  const [editingModalData, setEditingModalData] = useState({})
 
   useEffect(() => {
     getShoes().then((rs) => {
@@ -66,7 +68,6 @@ const Dashboard = () => {
   }, [])
 
   const onDelete = (selectedIds) => {
-    console.log(selectedIds)
     destroyShoes({ ids: selectedIds })
     getShoes().then((rs) => {
       const result = rs.data.data
@@ -82,7 +83,8 @@ const Dashboard = () => {
   }
 
   const onClickTableRow = (data) => {
-    console.log(data)
+    setIsEditingModalVisible(true)
+    setEditingModalData(data)
   }
 
   const menu = (
@@ -169,6 +171,12 @@ const Dashboard = () => {
       <AddingModal
         isModalVisible={isAddingModalVisible}
         onCancel={() => setIsAddingModalVisible(false)}
+      />
+      <EditingModal
+        isModalVisible={isEditingModalVisible}
+        onCancel={() => setIsEditingModalVisible(false)}
+        data={editingModalData}
+        key={isEditingModalVisible}
       />
     </Layout>
   )

@@ -16,20 +16,22 @@ const formItemLayout = {
   },
 }
 
-const AddingModal = (props) => {
-  const { onCancel, isModalVisible } = props
+const EditingModal = (props) => {
+  const { onCancel, isModalVisible, data } = props
+
+  console.log(data)
 
   const [form, setForm] = useState({
     name: {
-      value: '',
+      value: data.name,
       errTxt: '',
     },
     price: {
-      value: 0,
+      value: data.price,
       errTxt: '',
     },
     desc: {
-      value: '',
+      value: data.desc,
       errTxt: '',
     },
     images: {
@@ -56,7 +58,7 @@ const AddingModal = (props) => {
   }
 
   const onChangeImg = () => {
-    console.log('here')
+    console.log('Change image')
   }
 
   const onOk = () => {
@@ -76,11 +78,11 @@ const AddingModal = (props) => {
 
   return (
     <Modal
-      title="Add new shoes"
+      title="Edit shoes"
       visible={isModalVisible}
       onOk={onOk}
       onCancel={onCancel}
-      okText="ADD"
+      okText="UPDATE"
     >
       <Form
         {...formItemLayout}
@@ -147,4 +149,4 @@ const AddingModal = (props) => {
   )
 }
 
-export default AddingModal
+export default EditingModal

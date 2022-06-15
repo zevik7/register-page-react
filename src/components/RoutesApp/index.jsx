@@ -8,6 +8,7 @@ import Dashboard from '../../containers/Dashboard'
 import NoMatch from '../../containers/NoMatch'
 import Profile from '../../containers/Profile'
 import Search from '../../containers/Search'
+import TestLayout from '../../containers/TestLayout'
 import { useAuth } from '../../context'
 
 const RoutesApp = () => {
@@ -19,6 +20,7 @@ const RoutesApp = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/test-layout" element={<TestLayout />} />
 
       {user.role === 'user' && <Route path="/profile" element={<Profile />} />}
       {user.role === 'admin' && (

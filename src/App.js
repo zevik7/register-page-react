@@ -7,13 +7,13 @@ import { AuthProvider } from './context/AuthContext'
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <LoadingProvider>
         <AuthProvider>
           <RoutesApp />
         </AuthProvider>
       </LoadingProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
